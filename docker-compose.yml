@@ -3,6 +3,7 @@ version: '2'
 services:
   app:
     build: .
+    command: carton exec perl main.pl
     volumes:
       - .:/app
     stdin_open: true
