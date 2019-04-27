@@ -37,7 +37,7 @@ print "Capture begin.\n";
 # Crawling routine
 while (1) {
   $tweets = $nt->user_timeline({user_id => $settings->{'target'}, count => 30});
-  for (my $i = 5; $i >= 0; $i--) {
+  for my $i (reverse 0..5) {
     unless (grep {$_ eq $tweets->[$i]{'id'}} @$old_tweet_ids) {
       my $name = $tweets->[$i]{'user'}{'name'};
       my $text = $tweets->[$i]{'text'};
