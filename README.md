@@ -6,8 +6,9 @@ Covfefeは不滅
 ```
 cp settings.yml.sample settings.yml
 vim settings.yml
-  # credentials: Your Twitter API keys
+  # credentials: Your Twitter and Slack API tokens
   # target: Your target Twitter "User ID" (Not "Screen name")
+  # slack_channel_id: Slack channel ID of destination to notify (Not channel name)
 
 docker-compose build
 docker-compose run --rm app carton install
