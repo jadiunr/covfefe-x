@@ -39,11 +39,11 @@ while (1) {
   for my $i (reverse 0..5) {
     unless (grep {$_ eq $tweets->[$i]{id}} @$old_tweet_ids) {
       my $tweet;
-      $tweet->{name} = $tweets->[$i]{user}{name};
+      $tweet->{user} = $tweets->[$i]{user};
       $tweet->{text} = $tweets->[$i]{text};
       $tweet->{media} = $tweets->[$i]{extended_entities}{media};
       $tweet->{date} = $tweets->[$i]{created_at};
-      print $tweet->{name}, "\n", $tweet->{text}, "\n", $tweet->{date}, "\n\n";
+      print $tweet->{user}{name}, "\n", $tweet->{text}, "\n", $tweet->{date}, "\n\n";
 
       if ($tweet->{media}) {
         notify($http, $settings, $tweet);
@@ -73,7 +73,9 @@ sub notify {
       [
         token => $settings->{credentials}{slack_token},
         channel => $settings->{slack_channel_id},
-        text => encode_utf8 "$tweet->{name}\n$tweet->{text}\n$tweet->{date}"
+        icon_url => $tweet->{user}{profile_image_url_https},
+        username => $tweet->{user}{name},
+        text => encode_utf8 $tweet->{text}
       ]
     );
   };
