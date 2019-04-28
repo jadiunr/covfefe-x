@@ -35,7 +35,7 @@ push(@$old_tweet_ids, $_->{id}) for @$tweets;
 print "Capture begin.\n";
 # Crawling routine
 while (1) {
-  $tweets = $nt->user_timeline({user_id => $settings->{target}, count => 30});
+  $tweets = eval { $nt->user_timeline({user_id => $settings->{target}, count => 30}) };
   for my $i (reverse 0..5) {
     unless (grep {$_ eq $tweets->[$i]{id}} @$old_tweet_ids) {
       my $tweet;
@@ -66,32 +66,36 @@ while (1) {
 
 sub notify {
   my ($http, $settings, $tweet) = @_;
-  $http->post(
-    'https://slack.com/api/chat.postMessage',
-    [],
-    [
-      token => $settings->{credentials}{slack_token},
-      channel => $settings->{slack_channel_id},
-      text => encode_utf8 "$tweet->{name}\n$tweet->{text}\n$tweet->{date}"
-    ]
-  );
+  eval {
+    $http->post(
+      'https://slack.com/api/chat.postMessage',
+      [],
+      [
+        token => $settings->{credentials}{slack_token},
+        channel => $settings->{slack_channel_id},
+        text => encode_utf8 "$tweet->{name}\n$tweet->{text}\n$tweet->{date}"
+      ]
+    );
+  };
 }
 
 sub upload {
   my ($http, $settings, $media) = @_;
   print $media->{media_url}."\n";
-  my $image = $http->get($media->{media_url});
+  my $image = eval { $http->get($media->{media_url}) };
   my ($tmpfh, $tmpfile) = tempfile(UNLINK => 1);
   print $tmpfh $image->content;
   close $tmpfh;
-  $http->request(POST (
-    'https://slack.com/api/files.upload',
-    'Content-Type' => 'form-data',
-    'Content' => [
-      token => $settings->{credentials}{slack_token},
-      channels => $settings->{slack_channel_id},
-      file => [$tmpfile]
-    ]
-  ));
+  eval {
+    $http->request(POST (
+      'https://slack.com/api/files.upload',
+      'Content-Type' => 'form-data',
+      'Content' => [
+        token => $settings->{credentials}{slack_token},
+        channels => $settings->{slack_channel_id},
+        file => [$tmpfile]
+      ]
+    ));
+  };
   unlink $tmpfile;
 }
