@@ -3,3 +3,4 @@ requires 'YAML::Tiny';
 requires 'Pry';
 requires 'Net::OAuth';
 requires 'Furl';
+requires 'Parallel::ForkManager';

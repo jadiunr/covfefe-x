@@ -1,23 +1,5 @@
 # carton snapshot format: version 1.0
 DISTRIBUTIONS
-  B-Hooks-EndOfScope-0.24
-    pathname: E/ET/ETHER/B-Hooks-EndOfScope-0.24.tar.gz
-    provides:
-      B::Hooks::EndOfScope 0.24
-      B::Hooks::EndOfScope::PP 0.24
-      B::Hooks::EndOfScope::XS 0.24
-    requirements:
-      ExtUtils::MakeMaker 0
-      Hash::Util::FieldHash 0
-      Module::Implementation 0.05
-      Scalar::Util 0
-      Sub::Exporter::Progressive 0.001006
-      Text::ParseWords 0
-      Tie::Hash 0
-      Variable::Magic 0.48
-      perl 5.006001
-      strict 0
-      warnings 0
   Class-Accessor-0.51
     pathname: K/KA/KASEI/Class-Accessor-0.51.tar.gz
     provides:
@@ -52,76 +34,6 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Clownfish-0.6.3
-    pathname: N/NW/NWELLNHOF/Clownfish-0.6.3.tar.gz
-    provides:
-      Clownfish 0.006003
-      Clownfish::Blob 0.006003
-      Clownfish::Boolean 0.006003
-      Clownfish::ByteBuf 0.006003
-      Clownfish::CharBuf 0.006003
-      Clownfish::Class 0.006003
-      Clownfish::Err 0.006003
-      Clownfish::Float 0.006003
-      Clownfish::Hash 0.006003
-      Clownfish::HashIterator 0.006003
-      Clownfish::Integer 0.006003
-      Clownfish::Method 0.006003
-      Clownfish::Obj 0.006003
-      Clownfish::String 0.006003
-      Clownfish::Vector 0.006003
-    requirements:
-      Clownfish::CFC 0.006003
-      Clownfish::CFC::Perl::Build 0.006003
-      Devel::PPPort 3.14
-      ExtUtils::CBuilder 0.21
-      ExtUtils::ParseXS 3
-      Module::Build 0.280801
-      perl v5.8.3
-  Clownfish-CFC-0.6.3
-    pathname: N/NW/NWELLNHOF/Clownfish-CFC-0.6.3.tar.gz
-    provides:
-      Clownfish::CFC 0.006003
-      Clownfish::CFC::Base 0.006003
-      Clownfish::CFC::Binding::Core 0.006003
-      Clownfish::CFC::Binding::Core::Aliases 0.006003
-      Clownfish::CFC::Binding::Core::Class 0.006003
-      Clownfish::CFC::Binding::Core::File 0.006003
-      Clownfish::CFC::Binding::Core::Function 0.006003
-      Clownfish::CFC::Binding::Core::Method 0.006003
-      Clownfish::CFC::Binding::Perl 0.006003
-      Clownfish::CFC::Binding::Perl::Class 0.006003
-      Clownfish::CFC::Binding::Perl::Constructor 0.006003
-      Clownfish::CFC::Binding::Perl::Method 0.006003
-      Clownfish::CFC::Binding::Perl::Pod 0.006003
-      Clownfish::CFC::Binding::Perl::Subroutine 0.006003
-      Clownfish::CFC::Binding::Perl::TypeMap 0.006003
-      Clownfish::CFC::Model::CBlock 0.006003
-      Clownfish::CFC::Model::Class 0.006003
-      Clownfish::CFC::Model::DocuComment 0.006003
-      Clownfish::CFC::Model::File 0.006003
-      Clownfish::CFC::Model::FileSpec 0.006003
-      Clownfish::CFC::Model::Function 0.006003
-      Clownfish::CFC::Model::Hierarchy 0.006003
-      Clownfish::CFC::Model::Method 0.006003
-      Clownfish::CFC::Model::ParamList 0.006003
-      Clownfish::CFC::Model::Parcel 0.006003
-      Clownfish::CFC::Model::Prereq 0.006003
-      Clownfish::CFC::Model::Symbol 0.006003
-      Clownfish::CFC::Model::Type 0.006003
-      Clownfish::CFC::Model::Variable 0.006003
-      Clownfish::CFC::Model::Version 0.006003
-      Clownfish::CFC::Parser 0.006003
-      Clownfish::CFC::Perl::Build 0.006003
-      Clownfish::CFC::Perl::Build::Charmonic 0.006003
-      Clownfish::CFC::Test 0.006003
-      Clownfish::CFC::Util 0.006003
-    requirements:
-      Devel::PPPort 3.14
-      ExtUtils::CBuilder 0.18
-      ExtUtils::ParseXS 3
-      Module::Build 0.3604
-      perl v5.8.3
   Config-INI-0.025
     pathname: R/RJ/RJBS/Config-INI-0.025.tar.gz
     provides:
@@ -144,14 +56,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       strict 0
       vars 0
-  Cpanel-JSON-XS-4.11
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.11.tar.gz
-    provides:
-      Cpanel::JSON::XS 4.11
-      Cpanel::JSON::XS::Type undef
-    requirements:
-      ExtUtils::MakeMaker 0
-      Pod::Text 2.08
   Data-OptList-0.110
     pathname: R/RJ/RJBS/Data-OptList-0.110.tar.gz
     provides:
@@ -517,17 +421,6 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  JSON-MaybeXS-1.004000
-    pathname: H/HA/HAARG/JSON-MaybeXS-1.004000.tar.gz
-    provides:
-      JSON::MaybeXS 1.004000
-    requirements:
-      Carp 0
-      Cpanel::JSON::XS 2.3310
-      ExtUtils::MakeMaker 0
-      JSON::PP 2.27300
-      Scalar::Util 0
-      perl 5.006
   LWP-MediaTypes-6.04
     pathname: O/OA/OALDERS/LWP-MediaTypes-6.04.tar.gz
     provides:
@@ -829,6 +722,24 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
+  Parallel-ForkManager-2.02
+    pathname: Y/YA/YANICK/Parallel-ForkManager-2.02.tar.gz
+    provides:
+      Parallel::ForkManager 2.02
+      Parallel::ForkManager::Child 2.02
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
+      File::Path 0
+      File::Spec 0
+      File::Temp 0
+      Moo 0
+      Moo::Role 0
+      POSIX 0
+      Storable 0
+      perl 5.006
+      strict 0
+      warnings 0
   Params-Util-1.07
     pathname: A/AD/ADAMK/Params-Util-1.07.tar.gz
     provides:
@@ -925,18 +836,6 @@ DISTRIBUTIONS
     requirements:
       Exporter 5.57
       perl 5.006
-  Slack-Notify-0.001
-    pathname: R/RO/ROBN/Slack-Notify-0.001.tar.gz
-    provides:
-      Slack::Notify 0.001
-    requirements:
-      ExtUtils::MakeMaker 0
-      HTTP::Tiny 0
-      JSON::MaybeXS 0
-      Moo 0
-      Type::Utils 0
-      Types::Standard 0
-      namespace::autoclean 0
   Sub-Exporter-0.987
     pathname: R/RJ/RJBS/Sub-Exporter-0.987.tar.gz
     provides:
@@ -956,13 +855,6 @@ DISTRIBUTIONS
       Sub::Exporter::Progressive 0.001013
     requirements:
       ExtUtils::MakeMaker 0
-  Sub-Identify-0.14
-    pathname: R/RG/RGARCIA/Sub-Identify-0.14.tar.gz
-    provides:
-      Sub::Identify 0.14
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
   Sub-Install-0.928
     pathname: R/RJ/RJBS/Sub-Install-0.928.tar.gz
     provides:
@@ -1017,50 +909,6 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Type-Tiny-1.004004
-    pathname: T/TO/TOBYINK/Type-Tiny-1.004004.tar.gz
-    provides:
-      Devel::TypeTiny::Perl56Compat 1.004004
-      Devel::TypeTiny::Perl58Compat 1.004004
-      Error::TypeTiny 1.004004
-      Error::TypeTiny::Assertion 1.004004
-      Error::TypeTiny::Compilation 1.004004
-      Error::TypeTiny::WrongNumberOfParameters 1.004004
-      Eval::TypeTiny 1.004004
-      Reply::Plugin::TypeTiny 1.004004
-      Test::TypeTiny 1.004004
-      Type::Coercion 1.004004
-      Type::Coercion::FromMoose 1.004004
-      Type::Coercion::Union 1.004004
-      Type::Library 1.004004
-      Type::Params 1.004004
-      Type::Parser 1.004004
-      Type::Registry 1.004004
-      Type::Tiny 1.004004
-      Type::Tiny::Class 1.004004
-      Type::Tiny::Duck 1.004004
-      Type::Tiny::Enum 1.004004
-      Type::Tiny::Intersection 1.004004
-      Type::Tiny::Role 1.004004
-      Type::Tiny::Union 1.004004
-      Type::Utils 1.004004
-      Types::Common::Numeric 1.004004
-      Types::Common::String 1.004004
-      Types::Standard 1.004004
-      Types::Standard::ArrayRef 1.004004
-      Types::Standard::CycleTuple 1.004004
-      Types::Standard::Dict 1.004004
-      Types::Standard::HashRef 1.004004
-      Types::Standard::Map 1.004004
-      Types::Standard::ScalarRef 1.004004
-      Types::Standard::StrMatch 1.004004
-      Types::Standard::Tied 1.004004
-      Types::Standard::Tuple 1.004004
-      Types::TypeTiny 1.004004
-    requirements:
-      Exporter::Tiny 0.040
-      ExtUtils::MakeMaker 6.17
-      perl 5.006001
   URI-1.76
     pathname: O/OA/OALDERS/URI-1.76.tar.gz
     provides:
@@ -1125,25 +973,6 @@ DISTRIBUTIONS
       strict 0
       utf8 0
       warnings 0
-  Variable-Magic-0.62
-    pathname: V/VP/VPIT/Variable-Magic-0.62.tar.gz
-    provides:
-      Variable::Magic 0.62
-    requirements:
-      Carp 0
-      Config 0
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      IO::Handle 0
-      IO::Select 0
-      IPC::Open3 0
-      POSIX 0
-      Socket 0
-      Test::More 0
-      XSLoader 0
-      base 0
-      lib 0
-      perl 5.008
   WWW-RobotRules-6.02
     pathname: G/GA/GAAS/WWW-RobotRules-6.02.tar.gz
     provides:
@@ -1215,7 +1044,7 @@ DISTRIBUTIONS
       HTTP::Request 6
       HTTP::Request::Common 6
       HTTP::Response 6
-      HTTP::Status 6
+      HTTP::Status 6.18
       IO::Select 0
       IO::Socket 0
       LWP::MediaTypes 6
@@ -1232,25 +1061,3 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  namespace-autoclean-0.28
-    pathname: E/ET/ETHER/namespace-autoclean-0.28.tar.gz
-    provides:
-      namespace::autoclean 0.28
-    requirements:
-      B::Hooks::EndOfScope 0.12
-      ExtUtils::MakeMaker 0
-      List::Util 0
-      Sub::Identify 0
-      namespace::clean 0.20
-      perl 5.006
-      strict 0
-      warnings 0
-  namespace-clean-0.27
-    pathname: R/RI/RIBASUSHI/namespace-clean-0.27.tar.gz
-    provides:
-      namespace::clean 0.27
-    requirements:
-      B::Hooks::EndOfScope 0.12
-      ExtUtils::MakeMaker 0
-      Package::Stash 0.23
-      perl 5.008001
