@@ -40,6 +40,7 @@ say 'Capture begin.';
 # Crawling routine
 while (1) {
   $tweets = eval { $nt->user_timeline({user_id => $settings->{target}, count => 30}) };
+  warn "WARNING: $@" if $@;
   for my $i (reverse 0..5) {
     unless (grep {$_ eq $tweets->[$i]{id}} @$old_tweet_ids) {
       my $tweet;
@@ -87,12 +88,14 @@ sub notify {
       ]
     );
   };
+  warn "WARNING: $@" if $@;
 }
 
 sub upload {
   my ($http, $settings, $media) = @_;
   say $media->{media_url};
   my $image = eval { $http->get($media->{media_url}) };
+  warn "WARNING: $@" if $@;
   my ($tmpfh, $tmpfile) = tempfile(UNLINK => 1);
   say $tmpfh $image->content;
   close $tmpfh;
@@ -107,5 +110,6 @@ sub upload {
       ]
     ));
   };
+  warn "WARNING: $@" if $@;
   unlink $tmpfile;
 }
