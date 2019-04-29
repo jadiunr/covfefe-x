@@ -83,7 +83,7 @@ sub notify {
         token => $settings->{credentials}{slack_token},
         channel => $settings->{slack_channel_id},
         icon_url => $tweet->{user}{profile_image_url_https},
-        username => $tweet->{user}{name},
+        username => encode_utf8 $tweet->{user}{name},
         text => encode_utf8 $tweet->{text}
       ]
     );
