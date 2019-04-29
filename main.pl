@@ -2,6 +2,7 @@ use strict;
 use warnings;
 use utf8;
 use Encode qw/ encode_utf8 /;
+use feature 'say';
 
 use Net::Twitter::Lite::WithAPIv1_1;
 use YAML::Tiny;
@@ -29,13 +30,13 @@ my $nt = Net::Twitter::Lite::WithAPIv1_1->new(
   access_token_secret => $settings->{credentials}{access_token_secret}
 );
 
-print "Initialize now.\n";
+say 'Initialize now.';
 # Initialize
 my $old_tweet_ids = [];
 my $tweets = $nt->user_timeline({user_id => $settings->{target}, count => 30});
 push(@$old_tweet_ids, $_->{id}) for @$tweets;
 
-print "Capture begin.\n";
+say 'Capture begin.';
 # Crawling routine
 while (1) {
   $tweets = eval { $nt->user_timeline({user_id => $settings->{target}, count => 30}) };
@@ -46,8 +47,6 @@ while (1) {
       $tweet->{text} = $tweets->[$i]{text};
       $tweet->{media} = $tweets->[$i]{extended_entities}{media};
       $tweet->{date} = $tweets->[$i]{created_at};
-      print $tweet->{user}{name}, "\n", $tweet->{text}, "\n", $tweet->{date}, "\n\n";
-
       if ($tweet->{media}) {
         notify($http, $settings, $tweet);
         for (@{$tweet->{media}}) {
@@ -58,6 +57,7 @@ while (1) {
       } else {
         notify($http, $settings, $tweet);
       }
+      say '';
     }
   }
   my $latest_tweet_ids = [];
@@ -69,6 +69,11 @@ while (1) {
 
 sub notify {
   my ($http, $settings, $tweet) = @_;
+
+  say $tweet->{user}{name};
+  say $tweet->{text};
+  say $tweet->{date};
+
   eval {
     $http->post(
       'https://slack.com/api/chat.postMessage',
@@ -86,10 +91,10 @@ sub notify {
 
 sub upload {
   my ($http, $settings, $media) = @_;
-  print $media->{media_url}."\n";
+  say $media->{media_url};
   my $image = eval { $http->get($media->{media_url}) };
   my ($tmpfh, $tmpfile) = tempfile(UNLINK => 1);
-  print $tmpfh $image->content;
+  say $tmpfh $image->content;
   close $tmpfh;
   eval {
     $http->request(POST (
