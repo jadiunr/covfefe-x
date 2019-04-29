@@ -18,6 +18,9 @@ my $settings = YAML::Tiny->read('./settings.yml')->[0];
 my $http = Furl->new();
 my $pm = Parallel::ForkManager->new(8);
 
+# Autoflush
+$|=1;
+
 # Authentication
 my $nt = Net::Twitter::Lite::WithAPIv1_1->new(
   consumer_key        => $settings->{credentials}{consumer_key},
