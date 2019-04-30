@@ -43,22 +43,9 @@ while (1) {
   warn "WARNING: $@" if $@;
   for my $i (reverse 0..5) {
     unless (grep {$_ eq $tweets->[$i]{id}} @$old_tweet_ids) {
-      my $tweet;
-      $tweet->{user} = $tweets->[$i]{user};
-      $tweet->{text} = $tweets->[$i]{text};
-      $tweet->{media} = $tweets->[$i]{extended_entities}{media};
-      $tweet->{date} = $tweets->[$i]{created_at};
-      if ($tweet->{media}) {
-        notify($http, $settings, $tweet);
-        for (@{$tweet->{media}}) {
-          $pm->start and next;
-          upload($http, $settings, $_);
-          $pm->finish;
-        };
-      } else {
-        notify($http, $settings, $tweet);
-      }
-      say '';
+      notify($pm, $http, $settings, $tweets->[$i]);
+      my $media = $tweets->[$i]{extended_entities}{media};
+      upload($pm, $http, $settings, $media) if $media;
     }
   }
   my $latest_tweet_ids = [];
@@ -69,11 +56,21 @@ while (1) {
 }
 
 sub notify {
-  my ($http, $settings, $tweet) = @_;
+  my ($pm, $http, $settings, $tweet) = @_;
+  $pm->start and return;
+
+  my $reply_user = $tweet->{in_reply_to_user_id};
+  my $reply_status = $tweet->{in_reply_to_status_id};
+  my $reply_url = ($reply_user and $reply_status)
+                  ?
+                  "\n\nIn reply to\nhttps://twitter.com/$reply_user/status/$reply_status"
+                  :
+                  '';
 
   say $tweet->{user}{name};
   say $tweet->{text};
-  say $tweet->{date};
+  say $tweet->{created_at};
+  say '';
 
   eval {
     $http->post(
@@ -84,32 +81,43 @@ sub notify {
         channel => $settings->{slack_channel_id},
         icon_url => $tweet->{user}{profile_image_url_https},
         username => encode_utf8 $tweet->{user}{name},
-        text => encode_utf8 $tweet->{text}
+        text => encode_utf8 $tweet->{text}.$reply_url
       ]
     );
   };
   warn "WARNING: $@" if $@;
+
+  $pm->finish;
 }
 
 sub upload {
-  my ($http, $settings, $media) = @_;
-  say $media->{media_url};
-  my $image = eval { $http->get($media->{media_url}) };
-  warn "WARNING: $@" if $@;
-  my ($tmpfh, $tmpfile) = tempfile(UNLINK => 1);
-  say $tmpfh $image->content;
-  close $tmpfh;
-  eval {
-    $http->request(POST (
-      'https://slack.com/api/files.upload',
-      'Content-Type' => 'form-data',
-      'Content' => [
-        token => $settings->{credentials}{slack_token},
-        channels => $settings->{slack_channel_id},
-        file => [$tmpfile]
-      ]
-    ));
-  };
-  warn "WARNING: $@" if $@;
-  unlink $tmpfile;
+  my ($pm, $http, $settings, $media) = @_;
+
+  for (@$media) {
+    $pm->start and next;
+
+    say $_->{media_url};
+    say '';
+
+    my $image = eval { $http->get($_->{media_url}) };
+    warn "WARNING: $@" if $@;
+    my ($tmpfh, $tmpfile) = tempfile(UNLINK => 1);
+    say $tmpfh $image->content;
+    close $tmpfh;
+    eval {
+      $http->request(POST (
+        'https://slack.com/api/files.upload',
+        'Content-Type' => 'form-data',
+        'Content' => [
+          token => $settings->{credentials}{slack_token},
+          channels => $settings->{slack_channel_id},
+          file => [$tmpfile]
+        ]
+      ));
+    };
+    warn "WARNING: $@" if $@;
+    unlink $tmpfile;
+
+    $pm->finish;
+  }
 }
