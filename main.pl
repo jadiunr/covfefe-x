@@ -70,7 +70,6 @@ sub notify {
   say $tweet->{user}{name};
   say $tweet->{text};
   say $tweet->{created_at};
-  say '';
 
   eval {
     $http->post(
@@ -80,7 +79,7 @@ sub notify {
         token => $settings->{credentials}{slack_token},
         channel => $settings->{slack_channel_id},
         icon_url => $tweet->{user}{profile_image_url_https},
-        username => encode_utf8 $tweet->{user}{name},
+        username => encode_utf8 $tweet->{user}{name}.' @'.$tweet->{user}{screen_name},
         text => encode_utf8 $tweet->{text}.$reply_url
       ]
     );
@@ -92,17 +91,18 @@ sub notify {
 
 sub upload {
   my ($pm, $http, $settings, $media) = @_;
+  
+  if (my $video = $media->[0]{video_info}{variants}) {
+    $pm->start and return;
 
-  for (@$media) {
-    $pm->start and next;
-
-    say $_->{media_url};
-    say '';
-
-    my $image = eval { $http->get($_->{media_url}) };
-    warn "WARNING: $@" if $@;
+    for (@$video) { $_->{bitrate} = 0 unless $_->{bitrate} }
+    my $url = (sort { $b->{bitrate} <=> $a->{bitrate} } @$video)[0]{url};
+    say $url;
+    my $binary = $http->get($url);
+    die 'Cannot fetch video: '.$url
+      if grep {$_ eq $binary->code} (404, 500);
     my ($tmpfh, $tmpfile) = tempfile(UNLINK => 1);
-    say $tmpfh $image->content;
+    say $tmpfh $binary->content;
     close $tmpfh;
     eval {
       $http->request(POST (
@@ -119,5 +119,33 @@ sub upload {
     unlink $tmpfile;
 
     $pm->finish;
+  } else {
+    for (@$media) {
+      $pm->start and next;
+
+      say $_->{media_url};
+
+      my $binary = $http->get($_->{media_url});
+      die 'Cannot fetch image: '.$_->{media_url}
+        if grep {$_ eq $binary->code} (404, 500);
+      my ($tmpfh, $tmpfile) = tempfile(UNLINK => 1);
+      say $tmpfh $binary->content;
+      close $tmpfh;
+      eval {
+        $http->request(POST (
+          'https://slack.com/api/files.upload',
+          'Content-Type' => 'form-data',
+          'Content' => [
+            token => $settings->{credentials}{slack_token},
+            channels => $settings->{slack_channel_id},
+            file => [$tmpfile]
+          ]
+        ));
+      };
+      warn "WARNING: $@" if $@;
+      unlink $tmpfile;
+
+      $pm->finish;
+    }
   }
 }
