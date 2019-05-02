@@ -39,8 +39,9 @@ push(@$old_tweet_ids, $_->{id}) for @$tweets;
 say 'Capture begin.';
 # Crawling routine
 while (1) {
-  $tweets = eval { $nt->user_timeline({user_id => $settings->{target}, count => 30}) };
-  warn "WARNING: $@" if $@;
+  my $tmp_tweets = eval { $nt->user_timeline({user_id => $settings->{target}, count => 30}) };
+  warn "WARNING: $@" and next if $@;
+  $tweets = $tmp_tweets;
   for my $i (reverse 0..5) {
     unless (grep {$_ eq $tweets->[$i]{id}} @$old_tweet_ids) {
       notify($pm, $http, $settings, $tweets->[$i]);
