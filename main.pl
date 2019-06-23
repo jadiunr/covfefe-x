@@ -3,10 +3,10 @@ use warnings;
 use utf8;
 use feature 'say';
 
+use Net::Twitter;
+
 use lib 'lib';
 use Slack::WebAPI;
-
-use Net::Twitter;
 
 # Autoflush
 $|=1;
