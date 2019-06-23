@@ -1,18 +1,14 @@
 use strict;
 use warnings;
 use utf8;
-use Encode qw/ encode_utf8 /;
+use Encode 'encode_utf8';
 use feature 'say';
-
-use Net::Twitter::Lite::WithAPIv1_1;
-use Furl;
+use File::Temp 'tempfile';
 use HTTP::Request::Common;
-use File::Temp qw/ tempfile /;
-use Parallel::ForkManager;
 
-binmode STDIN,  ":utf8";
-binmode STDOUT, ":utf8";
-binmode STDERR, ":utf8";
+use Net::Twitter;
+use Furl;
+use Parallel::ForkManager;
 
 my $http = Furl->new();
 my $pm = Parallel::ForkManager->new(8);
@@ -21,7 +17,8 @@ my $pm = Parallel::ForkManager->new(8);
 $|=1;
 
 # Authentication
-my $nt = Net::Twitter::Lite::WithAPIv1_1->new(
+my $nt = Net::Twitter->new(
+  traits              => ['API::RESTv1_1'],
   consumer_key        => $ENV{COVFEFE_TWITTER_CK},
   consumer_secret     => $ENV{COVFEFE_TWITTER_CS},
   access_token        => $ENV{COVFEFE_TWITTER_AT},
@@ -64,9 +61,9 @@ sub notify {
                   ? "\n\nIn reply to\nhttps://twitter.com/$reply_user/status/$reply_status"
                   : '';
 
-  say $tweet->{user}{name};
-  say $tweet->{text};
-  say $tweet->{created_at};
+  say encode_utf8 $tweet->{user}{name};
+  say encode_utf8 $tweet->{text};
+  say encode_utf8 $tweet->{created_at};
 
   eval {
     $http->post(

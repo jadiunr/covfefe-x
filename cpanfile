@@ -1,5 +1,4 @@
-requires 'Net::Twitter::Lite::WithAPIv1_1';
+requires 'Net::Twitter';
 requires 'Pry';
-requires 'Net::OAuth';
 requires 'Furl';
 requires 'Parallel::ForkManager';
