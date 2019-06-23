@@ -1,9 +1,0 @@
-credentials:
-  consumer_key: 
-  consumer_secret: 
-  access_token: 
-  access_token_secret: 
-  slack_token: 
-
-target: ''
-slack_channel_id: 

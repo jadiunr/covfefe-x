@@ -91,11 +91,11 @@ DISTRIBUTIONS
       Devel::Caller 0.03
       ExtUtils::MakeMaker 0
       Test::More 0
-  Devel-StackTrace-2.03
-    pathname: D/DR/DROLSKY/Devel-StackTrace-2.03.tar.gz
+  Devel-StackTrace-2.04
+    pathname: D/DR/DROLSKY/Devel-StackTrace-2.04.tar.gz
     provides:
-      Devel::StackTrace 2.03
-      Devel::StackTrace::Frame 2.03
+      Devel::StackTrace 2.04
+      Devel::StackTrace::Frame 2.04
     requirements:
       ExtUtils::MakeMaker 0
       File::Spec 0
@@ -590,13 +590,13 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test 0
       perl 5.006
-  Net-HTTP-6.18
-    pathname: O/OA/OALDERS/Net-HTTP-6.18.tar.gz
+  Net-HTTP-6.19
+    pathname: O/OA/OALDERS/Net-HTTP-6.19.tar.gz
     provides:
-      Net::HTTP 6.18
-      Net::HTTP::Methods 6.18
-      Net::HTTP::NB 6.18
-      Net::HTTPS 6.18
+      Net::HTTP 6.19
+      Net::HTTP::Methods 6.19
+      Net::HTTP::NB 6.19
+      Net::HTTPS 6.19
     requirements:
       Carp 0
       Compress::Raw::Zlib 0
@@ -647,16 +647,15 @@ DISTRIBUTIONS
       Test::More 0.66
       Test::Warn 0.21
       URI::Escape 3.28
-  Net-SSLeay-1.85
-    pathname: M/MI/MIKEM/Net-SSLeay-1.85.tar.gz
+  Net-SSLeay-1.88
+    pathname: C/CH/CHRISN/Net-SSLeay-1.88.tar.gz
     provides:
-      Net::SSLeay 1.85
-      Net::SSLeay::Handle 0.61
+      Net::SSLeay 1.88
+      Net::SSLeay::Handle 1.88
     requirements:
-      ExtUtils::MakeMaker 6.36
+      ExtUtils::MakeMaker 0
       MIME::Base64 0
-      Test::More 0.60_01
-      perl 5.005
+      perl 5.008001
   Net-Twitter-Lite-0.12008
     pathname: M/MM/MMIMS/Net-Twitter-Lite-0.12008.tar.gz
     provides:
@@ -985,46 +984,32 @@ DISTRIBUTIONS
       Fcntl 0
       URI 1.10
       perl 5.008001
-  YAML-Tiny-1.73
-    pathname: E/ET/ETHER/YAML-Tiny-1.73.tar.gz
+  libwww-perl-6.39
+    pathname: O/OA/OALDERS/libwww-perl-6.39.tar.gz
     provides:
-      YAML::Tiny 1.73
-    requirements:
-      B 0
-      Carp 0
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      Fcntl 0
-      Scalar::Util 0
-      perl 5.008001
-      strict 0
-      warnings 0
-  libwww-perl-6.38
-    pathname: O/OA/OALDERS/libwww-perl-6.38.tar.gz
-    provides:
-      LWP 6.38
-      LWP::Authen::Basic 6.38
-      LWP::Authen::Digest 6.38
-      LWP::Authen::Ntlm 6.38
-      LWP::ConnCache 6.38
-      LWP::Debug 6.38
-      LWP::Debug::TraceHTTP 6.38
-      LWP::DebugFile 6.38
-      LWP::MemberMixin 6.38
-      LWP::Protocol 6.38
-      LWP::Protocol::cpan 6.38
-      LWP::Protocol::data 6.38
-      LWP::Protocol::file 6.38
-      LWP::Protocol::ftp 6.38
-      LWP::Protocol::gopher 6.38
-      LWP::Protocol::http 6.38
-      LWP::Protocol::loopback 6.38
-      LWP::Protocol::mailto 6.38
-      LWP::Protocol::nntp 6.38
-      LWP::Protocol::nogo 6.38
-      LWP::RobotUA 6.38
-      LWP::Simple 6.38
-      LWP::UserAgent 6.38
+      LWP 6.39
+      LWP::Authen::Basic 6.39
+      LWP::Authen::Digest 6.39
+      LWP::Authen::Ntlm 6.39
+      LWP::ConnCache 6.39
+      LWP::Debug 6.39
+      LWP::Debug::TraceHTTP 6.39
+      LWP::DebugFile 6.39
+      LWP::MemberMixin 6.39
+      LWP::Protocol 6.39
+      LWP::Protocol::cpan 6.39
+      LWP::Protocol::data 6.39
+      LWP::Protocol::file 6.39
+      LWP::Protocol::ftp 6.39
+      LWP::Protocol::gopher 6.39
+      LWP::Protocol::http 6.39
+      LWP::Protocol::loopback 6.39
+      LWP::Protocol::mailto 6.39
+      LWP::Protocol::nntp 6.39
+      LWP::Protocol::nogo 6.39
+      LWP::RobotUA 6.39
+      LWP::Simple 6.39
+      LWP::UserAgent 6.39
       libwww::perl undef
     requirements:
       CPAN::Meta::Requirements 2.120620
@@ -1044,7 +1029,7 @@ DISTRIBUTIONS
       HTTP::Request 6
       HTTP::Request::Common 6
       HTTP::Response 6
-      HTTP::Status 6.18
+      HTTP::Status 6
       IO::Select 0
       IO::Socket 0
       LWP::MediaTypes 6

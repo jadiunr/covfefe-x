@@ -5,7 +5,6 @@ use Encode qw/ encode_utf8 /;
 use feature 'say';
 
 use Net::Twitter::Lite::WithAPIv1_1;
-use YAML::Tiny;
 use Furl;
 use HTTP::Request::Common;
 use File::Temp qw/ tempfile /;
@@ -15,7 +14,6 @@ binmode STDIN,  ":utf8";
 binmode STDOUT, ":utf8";
 binmode STDERR, ":utf8";
 
-my $settings = YAML::Tiny->read('./settings.yml')->[0];
 my $http = Furl->new();
 my $pm = Parallel::ForkManager->new(8);
 
@@ -24,29 +22,29 @@ $|=1;
 
 # Authentication
 my $nt = Net::Twitter::Lite::WithAPIv1_1->new(
-  consumer_key        => $settings->{credentials}{consumer_key},
-  consumer_secret     => $settings->{credentials}{consumer_secret},
-  access_token        => $settings->{credentials}{access_token},
-  access_token_secret => $settings->{credentials}{access_token_secret}
+  consumer_key        => $ENV{COVFEFE_TWITTER_CK},
+  consumer_secret     => $ENV{COVFEFE_TWITTER_CS},
+  access_token        => $ENV{COVFEFE_TWITTER_AT},
+  access_token_secret => $ENV{COVFEFE_TWITTER_ATS}
 );
 
 say 'Initialize now.';
 # Initialize
 my $old_tweet_ids = [];
-my $tweets = $nt->user_timeline({user_id => $settings->{target}, count => 30});
+my $tweets = $nt->user_timeline({user_id => $ENV{COVFEFE_TWITTER_TARGET_ID}, count => 30});
 push(@$old_tweet_ids, $_->{id}) for @$tweets;
 
 say 'Capture begin.';
 # Crawling routine
 while (1) {
-  my $tmp_tweets = eval { $nt->user_timeline({user_id => $settings->{target}, count => 30}) };
+  my $tmp_tweets = eval { $nt->user_timeline({user_id => $ENV{COVFEFE_TWITTER_TARGET_ID}, count => 30}) };
   warn "WARNING: $@" and next if $@;
   $tweets = $tmp_tweets;
   for my $i (reverse 0..5) {
     unless (grep {$_ eq $tweets->[$i]{id}} @$old_tweet_ids) {
-      notify($pm, $http, $settings, $tweets->[$i]);
+      notify($pm, $http, $tweets->[$i]);
       my $media = $tweets->[$i]{extended_entities}{media};
-      upload($pm, $http, $settings, $media) if $media;
+      upload($pm, $http, $media) if $media;
     }
   }
   my $latest_tweet_ids = [];
@@ -57,16 +55,14 @@ while (1) {
 }
 
 sub notify {
-  my ($pm, $http, $settings, $tweet) = @_;
+  my ($pm, $http, $tweet) = @_;
   $pm->start and return;
 
   my $reply_user = $tweet->{in_reply_to_user_id};
   my $reply_status = $tweet->{in_reply_to_status_id};
   my $reply_url = ($reply_user and $reply_status)
-                  ?
-                  "\n\nIn reply to\nhttps://twitter.com/$reply_user/status/$reply_status"
-                  :
-                  '';
+                  ? "\n\nIn reply to\nhttps://twitter.com/$reply_user/status/$reply_status"
+                  : '';
 
   say $tweet->{user}{name};
   say $tweet->{text};
@@ -77,8 +73,8 @@ sub notify {
       'https://slack.com/api/chat.postMessage',
       [],
       [
-        token => $settings->{credentials}{slack_token},
-        channel => $settings->{slack_channel_id},
+        token => $ENV{COVFEFE_SLACK_TOKEN},
+        channel => $ENV{COVFEFE_SLACK_CHANNEL_ID},
         icon_url => $tweet->{user}{profile_image_url_https},
         username => encode_utf8 $tweet->{user}{name}.' @'.$tweet->{user}{screen_name},
         text => encode_utf8 $tweet->{text}.$reply_url
@@ -91,7 +87,7 @@ sub notify {
 }
 
 sub upload {
-  my ($pm, $http, $settings, $media) = @_;
+  my ($pm, $http, $media) = @_;
   
   if (my $video = $media->[0]{video_info}{variants}) {
     $pm->start and return;
@@ -110,8 +106,8 @@ sub upload {
         'https://slack.com/api/files.upload',
         'Content-Type' => 'form-data',
         'Content' => [
-          token => $settings->{credentials}{slack_token},
-          channels => $settings->{slack_channel_id},
+          token => $ENV{COVFEFE_SLACK_TOKEN},
+          channels => $ENV{COVFEFE_SLACK_CHANNEL_ID},
           file => [$tmpfile]
         ]
       ));
@@ -137,8 +133,8 @@ sub upload {
           'https://slack.com/api/files.upload',
           'Content-Type' => 'form-data',
           'Content' => [
-            token => $settings->{credentials}{slack_token},
-            channels => $settings->{slack_channel_id},
+            token => $ENV{COVFEFE_SLACK_TOKEN},
+            channels => $ENV{COVFEFE_SLACK_CHANNEL_ID},
             file => [$tmpfile]
           ]
         ));
