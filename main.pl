@@ -51,7 +51,7 @@ while (1) {
   push(@$latest_tweet_ids, $_->{id}) for @$tweets;
   $old_tweet_ids = $latest_tweet_ids;
 
-  sleep(3);
+  sleep(2);
 }
 
 sub notify {
