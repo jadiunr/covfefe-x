@@ -651,6 +651,19 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       PadWalker 0.08
       Test::More 0
+  Devel-CheckCompiler-0.07
+    pathname: S/SY/SYOHEX/Devel-CheckCompiler-0.07.tar.gz
+    provides:
+      Devel::AssertC99 undef
+      Devel::CheckCompiler 0.07
+    requirements:
+      Exporter 0
+      ExtUtils::CBuilder 0
+      File::Temp 0
+      Module::Build::Tiny 0.035
+      Test::More 0.98
+      parent 0
+      perl 5.008001
   Devel-GlobalDestruction-0.14
     pathname: H/HA/HAARG/Devel-GlobalDestruction-0.14.tar.gz
     provides:
@@ -682,6 +695,12 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Devel-PPPort-3.52
+    pathname: A/AT/ATOOMIC/Devel-PPPort-3.52.tar.gz
+    provides:
+      Devel::PPPort 3.52
+    requirements:
+      ExtUtils::MakeMaker 0
   Devel-StackTrace-2.04
     pathname: D/DR/DROLSKY/Devel-StackTrace-2.04.tar.gz
     provides:
@@ -1044,14 +1063,6 @@ DISTRIBUTIONS
       Mozilla::CA 0
       Net::SSLeay 1.46
       Scalar::Util 0
-  JSON-4.02
-    pathname: I/IS/ISHIGAKI/JSON-4.02.tar.gz
-    provides:
-      JSON 4.02
-      JSON::Backend::PP 4.02
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
   JSON-MaybeXS-1.004000
     pathname: H/HA/HAARG/JSON-MaybeXS-1.004000.tar.gz
     provides:
@@ -1180,6 +1191,21 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Module-Build-XSUtil-0.19
+    pathname: H/HI/HIDEAKIO/Module-Build-XSUtil-0.19.tar.gz
+    provides:
+      Module::Build::XSUtil 0.19
+    requirements:
+      Devel::CheckCompiler 0
+      Devel::PPPort 0
+      Exporter 0
+      ExtUtils::CBuilder 0
+      File::Basename 0
+      File::Path 0
+      Module::Build 0.4005
+      XSLoader 0
+      parent 0
+      perl 5.008001
   Module-Implementation-0.09
     pathname: D/DR/DROLSKY/Module-Implementation-0.09.tar.gz
     provides:
@@ -1642,6 +1668,44 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
+  Mouse-v2.5.6
+    pathname: S/SK/SKAJI/Mouse-v2.5.6.tar.gz
+    provides:
+      Mouse v2.5.6
+      Mouse::Exporter undef
+      Mouse::Meta::Attribute undef
+      Mouse::Meta::Class undef
+      Mouse::Meta::Method undef
+      Mouse::Meta::Method::Accessor undef
+      Mouse::Meta::Method::Constructor undef
+      Mouse::Meta::Method::Delegation undef
+      Mouse::Meta::Method::Destructor undef
+      Mouse::Meta::Module undef
+      Mouse::Meta::Role undef
+      Mouse::Meta::Role::Application undef
+      Mouse::Meta::Role::Application::RoleSummation undef
+      Mouse::Meta::Role::Composite undef
+      Mouse::Meta::Role::Method undef
+      Mouse::Meta::TypeConstraint undef
+      Mouse::Object undef
+      Mouse::PurePerl undef
+      Mouse::Role v2.5.6
+      Mouse::Spec v2.5.6
+      Mouse::TypeRegistry undef
+      Mouse::Util v2.5.6
+      Mouse::Util::MetaRole undef
+      Mouse::Util::TypeConstraints undef
+      Squirrel undef
+      Squirrel::Role undef
+      Test::Mouse undef
+      ouse undef
+    requirements:
+      ExtUtils::CBuilder 0
+      Module::Build 0.4005
+      Module::Build::XSUtil 0.19
+      Scalar::Util 1.14
+      XSLoader 0.02
+      perl 5.008005
   Mozilla-CA-20180117
     pathname: A/AB/ABH/Mozilla-CA-20180117.tar.gz
     provides:
@@ -1780,32 +1844,6 @@ DISTRIBUTIONS
       namespace::autoclean 0
       overload 0
       perl 5.008001
-  Net-Twitter-Lite-0.12008
-    pathname: M/MM/MMIMS/Net-Twitter-Lite-0.12008.tar.gz
-    provides:
-      Net::Twitter::Lite 0.12008
-      Net::Twitter::Lite::API::V1 0.12008
-      Net::Twitter::Lite::API::V1_1 0.12008
-      Net::Twitter::Lite::Error 0.12008
-      Net::Twitter::Lite::WithAPIv1_1 0.12008
-      Net::Twitter::Lite::WrapResult 0.12008
-    requirements:
-      Carp 0
-      Encode 0
-      HTTP::Request::Common 0
-      JSON 2.02
-      LWP::Protocol::https 0
-      LWP::UserAgent 2.032
-      Module::Build::Tiny 0.034
-      Net::HTTP >= 0, != 6.04, != 6.05
-      Net::Netrc 0
-      URI 1.40
-      URI::Escape 0
-      overload 0
-      parent 0
-      perl 5.006
-      strict 0
-      warnings 0
   Package-DeprecationManager-0.17
     pathname: D/DR/DROLSKY/Package-DeprecationManager-0.17.tar.gz
     provides:

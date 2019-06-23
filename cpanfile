@@ -1,4 +1,8 @@
 requires 'Net::Twitter';
-requires 'Pry';
 requires 'Furl';
 requires 'Parallel::ForkManager';
+requires 'Mouse';
+
+on 'develop' => sub {
+  requires 'Pry';
+};
