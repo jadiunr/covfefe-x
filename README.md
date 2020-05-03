@@ -1,7 +1,5 @@
 # covfefe-x
 
-[![Build Status](https://cloud.drone.io/api/badges/jadiunr/covfefe-x/status.svg)](https://cloud.drone.io/jadiunr/covfefe-x)
-
 Covfefeは不滅
 
 ## Get started
