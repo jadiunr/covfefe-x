@@ -36,7 +36,7 @@ while(1) {
   warn "WARNING: $@" and next if $@;
 
   if (@$tweets) {
-    for my $tweet (@$tweets) {
+    for my $tweet (reverse @$tweets) {
       $slack->notify($tweet);
       my $media = $tweet->{extended_entities}{media};
       $slack->upload($media) if $media;
